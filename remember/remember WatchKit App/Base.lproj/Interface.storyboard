@@ -10,14 +10,23 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="remember_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <imageView height="167" alignment="center" verticalAlignment="center" id="lqa-gk-X4B"/>
+                        <group width="135" height="135" alignment="center" verticalAlignment="center" backgroundImage="greenDay0" id="mtb-E9-Y7M">
+                            <items>
+                                <button width="75" height="75" alignment="center" verticalAlignment="center" title="Button" id="5yD-II-aMG">
+                                    <connections>
+                                        <segue destination="4mO-hO-Wf5" kind="push" identifier="showAll" id="Tra-55-iyN"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="progressCircle" destination="lqa-gk-X4B" id="lyE-3K-StJ"/>
+                        <outlet property="groupTasks" destination="mtb-E9-Y7M" id="Rfc-Uf-INy"/>
+                        <outlet property="tasksButton" destination="5yD-II-aMG" id="98f-do-pCl"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="110" y="256.5"/>
+            <point key="canvasLocation" x="53" y="225"/>
         </scene>
         <!--TaskListInterfaceController-->
         <scene sceneID="Kau-kl-KTm">

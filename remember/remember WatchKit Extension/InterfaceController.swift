@@ -12,9 +12,8 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
-    
-    @IBOutlet var progressCircle: WKInterfaceImage!
-    
+    @IBOutlet var groupTasks: WKInterfaceGroup!
+    @IBOutlet var tasksButton: WKInterfaceButton!
     
     
     var professionalArray = ["Meeting", "Video Call", "Send Email"]
@@ -24,35 +23,61 @@ class InterfaceController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
-        // Configure interface objects here.
+    
+    
     }
 
     override func willActivate() {
         super.willActivate()
         
-        //animated progress circle
         
-        self.progressCircle.setImageNamed("redDay")
-        self.progressCircle.startAnimatingWithImagesInRange(NSMakeRange(0, 20), duration: 2, repeatCount: 1)
+        self.completedTasks(10)
+        self.configureButton()
+        
     }
+    
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-        
     
-//    @IBAction func addProfessionalReminder() {
-//    presentControllerWithName("TaskListInterfaceController", context: professionalArray)
-//    }
-//    
-//    @IBAction func addPersonalReminder() {
-//          presentControllerWithName("TaskListInterfaceController", context: self.personalArray)
-//    }
-//    
-//    @IBAction func addSecretReminder() {
-//          presentControllerWithName("TaskListInterfaceController", context: self.secretArray)
-//    }
+    
+    
+    func configureButton(){
+    
+        self.tasksButton.setTitle("Hoje")
+        self.tasksButton.setBackgroundColor(UIColor.clearColor())
 
-}
+    }
+    
+    func completedTasks(numberOfTasks: Int){
+        
+        if numberOfTasks <= 10 {
+            self.groupTasks.setBackgroundImageNamed("greenDay")
+            self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 11), duration: 4, repeatCount: 1)
+        }else if numberOfTasks <= 15{
+            self.groupTasks.setBackgroundImageNamed("yellowDay")
+            self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 15), duration: 4, repeatCount: 1)
+        }else{
+            self.groupTasks.setBackgroundImageNamed("redDay")
+            self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 20), duration: 4, repeatCount: 1)
+        }
+        
+    }//fim completedTasks
+
+    
+    override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
+        
+        if segueIdentifier == "showAll"{
+            return self.professionalArray
+        }
+        return nil
+    }
+    
+    
+}//fim classe
+
+
+
+
