@@ -14,7 +14,6 @@ class TaskListInterfaceController: WKInterfaceController {
  
     @IBOutlet var tableData: WKInterfaceTable!
     
-    
 var arrayData = [String]()
     
     override func awakeWithContext(context: AnyObject?) {
@@ -42,17 +41,21 @@ var arrayData = [String]()
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             row.taskLabel.setText(taskName)
+            
+            self.arrayData = array
         }
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+ 
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
-        let tryAgain = WKAlertAction(title: "Try Again", style: .Default, handler: { () -> Void in })
-        let cancel = WKAlertAction(title: "Cancel", style: .Cancel, handler: { () -> Void in })
-        self.presentAlertControllerWithTitle("Title.", message: "Message.", preferredStyle: WKAlertControllerStyle.Alert, actions:[tryAgain, cancel])
-
+        if segueIdentifier == "showDetails"{
+            return self.arrayData[rowIndex]
+        }
         
+        return nil
     }
     
-        
+    
+    
 }

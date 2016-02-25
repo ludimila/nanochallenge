@@ -21,6 +21,7 @@
 		932909CE1C7BA17400C24500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 932909CD1C7BA17400C24500 /* Assets.xcassets */; };
 		9342A26A1C7CD997009A28A8 /* TaskListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */; };
 		9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A26B1C7CEE66009A28A8 /* RowListController.swift */; };
+		93E3EE421C7F93D000F13157 /* DetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		932909CF1C7BA17400C24500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListInterfaceController.swift; sourceTree = "<group>"; };
 		9342A26B1C7CEE66009A28A8 /* RowListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowListController.swift; sourceTree = "<group>"; };
+		93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInterfaceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */,
 				9342A26B1C7CEE66009A28A8 /* RowListController.swift */,
 				932909CB1C7BA17400C24500 /* ExtensionDelegate.swift */,
+				93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */,
 				932909CD1C7BA17400C24500 /* Assets.xcassets */,
 				932909CF1C7BA17400C24500 /* Info.plist */,
 			);
@@ -305,6 +308,7 @@
 				932909CA1C7BA17400C24500 /* InterfaceController.swift in Sources */,
 				9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */,
 				9342A26A1C7CD997009A28A8 /* TaskListInterfaceController.swift in Sources */,
+				93E3EE421C7F93D000F13157 /* DetailInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@
                     <items>
                         <group width="135" height="135" alignment="center" verticalAlignment="center" backgroundImage="greenDay0" id="mtb-E9-Y7M">
                             <items>
-                                <button width="75" height="75" alignment="center" verticalAlignment="center" title="Button" id="5yD-II-aMG">
+                                <button width="120" height="120" alignment="center" verticalAlignment="center" title="Button" id="5yD-II-aMG">
                                     <connections>
                                         <segue destination="4mO-hO-Wf5" kind="push" identifier="showAll" id="Tra-55-iyN"/>
                                     </connections>
@@ -36,13 +36,22 @@
                         <table alignment="left" id="ALi-He-PY8">
                             <items>
                                 <tableRow identifier="row" id="NFD-Pd-HsU" customClass="RowListController" customModule="remember_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="4Pv-RC-59E">
+                                    <group key="rootItem" width="1" height="51.5" alignment="left" layout="vertical" id="4Pv-RC-59E">
                                         <items>
-                                            <label alignment="left" text="Label" id="HVK-tA-xvI"/>
+                                            <label alignment="left" text="Label" id="cOj-jW-ji8">
+                                                <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
+                                            </label>
+                                            <timer width="41.5" alignment="left" format="short" id="yTw-tq-xtI">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                <calendarUnit key="units" hour="YES" minute="YES"/>
+                                            </timer>
                                         </items>
+                                        <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                     </group>
                                     <connections>
-                                        <outlet property="taskLabel" destination="HVK-tA-xvI" id="O6x-hv-XAf"/>
+                                        <outlet property="taskLabel" destination="cOj-jW-ji8" id="Dq2-Nc-0Y2"/>
+                                        <outlet property="taskTime" destination="yTw-tq-xtI" id="lEY-0s-rgM"/>
+                                        <segue destination="bZv-gv-JDm" kind="push" identifier="showDetails" id="lDl-nR-0Ja"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -54,6 +63,34 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="277" y="225"/>
+        </scene>
+        <!--Detail Interface Controller-->
+        <scene sceneID="bvr-MM-Ve1">
+            <objects>
+                <controller id="bZv-gv-JDm" customClass="DetailInterfaceController" customModule="remember_WatchKit_Extension">
+                    <items>
+                        <label alignment="center" text="Label" id="4v2-IN-3cb"/>
+                        <group width="1" alignment="center" verticalAlignment="center" id="YeW-EC-CEU">
+                            <items>
+                                <button width="50" alignment="center" title="Ok" id="4ti-79-ag7">
+                                    <connections>
+                                        <action selector="doneTask" destination="bZv-gv-JDm" id="9RQ-nn-piJ"/>
+                                    </connections>
+                                </button>
+                                <button width="50" alignment="center" title="No" id="TsC-77-v9O">
+                                    <connections>
+                                        <action selector="notDoneTask" destination="bZv-gv-JDm" id="jGR-oW-bIb"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="detailLabel" destination="4v2-IN-3cb" id="8Vy-Vc-vD6"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="485" y="225"/>
         </scene>
     </scenes>
 </document>
