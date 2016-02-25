@@ -19,6 +19,8 @@
 		932909CA1C7BA17400C24500 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932909C91C7BA17400C24500 /* InterfaceController.swift */; };
 		932909CC1C7BA17400C24500 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932909CB1C7BA17400C24500 /* ExtensionDelegate.swift */; };
 		932909CE1C7BA17400C24500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 932909CD1C7BA17400C24500 /* Assets.xcassets */; };
+		9342A26A1C7CD997009A28A8 /* TaskListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */; };
+		9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A26B1C7CEE66009A28A8 /* RowListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		932909CB1C7BA17400C24500 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		932909CD1C7BA17400C24500 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		932909CF1C7BA17400C24500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListInterfaceController.swift; sourceTree = "<group>"; };
+		9342A26B1C7CEE66009A28A8 /* RowListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				932909C91C7BA17400C24500 /* InterfaceController.swift */,
+				9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */,
+				9342A26B1C7CEE66009A28A8 /* RowListController.swift */,
 				932909CB1C7BA17400C24500 /* ExtensionDelegate.swift */,
 				932909CD1C7BA17400C24500 /* Assets.xcassets */,
 				932909CF1C7BA17400C24500 /* Info.plist */,
@@ -297,6 +303,8 @@
 			files = (
 				932909CC1C7BA17400C24500 /* ExtensionDelegate.swift in Sources */,
 				932909CA1C7BA17400C24500 /* InterfaceController.swift in Sources */,
+				9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */,
+				9342A26A1C7CD997009A28A8 /* TaskListInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +535,7 @@
 				932909D41C7BA17400C24500 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		932909D61C7BA17400C24500 /* Build configuration list for PBXNativeTarget "remember WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +544,7 @@
 				932909D81C7BA17400C24500 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		932909DA1C7BA17400C24500 /* Build configuration list for PBXNativeTarget "remember" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +553,7 @@
 				932909DC1C7BA17400C24500 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

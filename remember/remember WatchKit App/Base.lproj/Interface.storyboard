@@ -8,8 +8,43 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="remember_WatchKit_App" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="remember_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <imageView height="167" alignment="center" verticalAlignment="center" id="lqa-gk-X4B"/>
+                    </items>
+                    <connections>
+                        <outlet property="progressCircle" destination="lqa-gk-X4B" id="lyE-3K-StJ"/>
+                    </connections>
+                </controller>
             </objects>
+            <point key="canvasLocation" x="110" y="256.5"/>
+        </scene>
+        <!--TaskListInterfaceController-->
+        <scene sceneID="Kau-kl-KTm">
+            <objects>
+                <controller identifier="TaskListInterfaceController" id="4mO-hO-Wf5" customClass="TaskListInterfaceController" customModule="remember_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="ALi-He-PY8">
+                            <items>
+                                <tableRow identifier="row" id="NFD-Pd-HsU" customClass="RowListController" customModule="remember_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="4Pv-RC-59E">
+                                        <items>
+                                            <label alignment="left" text="Label" id="HVK-tA-xvI"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="taskLabel" destination="HVK-tA-xvI" id="O6x-hv-XAf"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableData" destination="ALi-He-PY8" id="cLE-RF-Oto"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="277" y="225"/>
         </scene>
     </scenes>
 </document>
