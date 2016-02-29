@@ -14,14 +14,13 @@ class TaskListInterfaceController: WKInterfaceController {
  
     @IBOutlet var tableData: WKInterfaceTable!
     
-    var arrayData = [String]()
+    var arrayData = [EKReminder]()
     var eventStore: EKEventStore!
     var reminders: [EKReminder]!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        self.putData(context as! [String])
     }
 
     override func willActivate() {
@@ -40,14 +39,14 @@ class TaskListInterfaceController: WKInterfaceController {
     }
 
     
-    func putData(array: [String]){
+    func putData(array: [EKReminder]){
         
         self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
         for (index, taskName) in array.enumerate(){
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
-            row.taskLabel.setText(taskName)
+            row.taskLabel.setText(taskName.title)
             
             self.arrayData = array
         }
@@ -59,7 +58,7 @@ class TaskListInterfaceController: WKInterfaceController {
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
         if segueIdentifier == "showDetails"{
-            return self.arrayData[rowIndex]
+           return self.arrayData[rowIndex].title
         }
         
         return nil
@@ -81,9 +80,8 @@ class TaskListInterfaceController: WKInterfaceController {
                     
                     dispatch_async(dispatch_get_main_queue()) {
 
-                        print(reminders)
-
-                        
+                        self.putData(reminders!)
+ 
                     }
                 })
             }else{
