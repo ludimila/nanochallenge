@@ -8,23 +8,30 @@
 
 import WatchKit
 import Foundation
-
+import EventKit
 
 class TaskListInterfaceController: WKInterfaceController {
  
     @IBOutlet var tableData: WKInterfaceTable!
     
-var arrayData = [String]()
+    var arrayData = [String]()
+    var eventStore: EKEventStore!
+    var reminders: [EKReminder]!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-     self.putData(context as! [String])
         
+        self.putData(context as! [String])
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        
+        self.eventStore = EKEventStore()
+        self.reminders = [EKReminder]()
+        self.requestAccessReminder()
     }
 
     override func didDeactivate() {
@@ -44,9 +51,11 @@ var arrayData = [String]()
             
             self.arrayData = array
         }
+        
+
     }
     
- 
+    
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
         if segueIdentifier == "showDetails"{
@@ -57,5 +66,31 @@ var arrayData = [String]()
     }
     
     
+    //calendario
     
+    func requestAccessReminder(){
+    
+
+        self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    self.reminders = reminders
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+
+                        print(reminders)
+
+                        
+                    }
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
+        }
+    
+    
+    }
 }
