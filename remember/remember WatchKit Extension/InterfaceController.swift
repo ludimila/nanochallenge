@@ -33,6 +33,7 @@ class InterfaceController: WKInterfaceController {
         
         self.completedTasks(10)
         self.configureButton()
+        self.getDayOfWeek()
         
     }
     
@@ -75,6 +76,15 @@ class InterfaceController: WKInterfaceController {
         return nil
     }
     
+    
+    func getDayOfWeek(){
+        let todayDate = NSDate()
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "EEEE"
+        let convertToString = formatter.stringFromDate(todayDate)
+        self.tasksButton.setTitle(convertToString)
+        
+    }
     
 }//fim classe
 

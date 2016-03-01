@@ -43,22 +43,6 @@ class TaskListInterfaceController: WKInterfaceController {
     }
 
     
-    func putData(array: [EKReminder]){
-        
-        self.tableData.setNumberOfRows(array.count, withRowType: "row")
-        
-        for (index, taskName) in array.enumerate(){
-            
-            let row = tableData.rowControllerAtIndex(index) as! RowListController
-            row.taskLabel.setText(taskName.title)
-            
-            self.arrayData = array
-        }
-        
-
-    }
-    
-    
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
         if segueIdentifier == "showDetails"{
@@ -95,6 +79,33 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
+    
+    
+    func putData(array: [EKReminder]){
+        
+        self.tableData.setNumberOfRows(array.count, withRowType: "row")
+        
+        for (index, taskName) in array.enumerate(){
+            
+            print(array[index])
+        
+            let row = tableData.rowControllerAtIndex(index) as! RowListController
+            row.taskLabel.setText(taskName.title)
+            
+            if taskName.completionDate != nil {
+                row.taskTime.setDate(taskName.completionDate!)
+            }
+            self.arrayData = array
+        }
+        
+        
+    }
+    
+    func getHour(){
+        
+        
+        
+    }
     
     
    // acessa eventos calendario

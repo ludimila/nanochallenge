@@ -39,13 +39,16 @@ class DetailInterfaceController: WKInterfaceController {
         
         var items = [WKPickerItem]()
         let done = WKPickerItem()
-        let notDone = WKPickerItem()
+        let forgot = WKPickerItem()
+        let todo = WKPickerItem()
         
-        done.title = "Done"
-        notDone.title = "Not Done"
+        done.title = "DONE!"
+        todo.title = "To Do"
+        forgot.title = "Forgot it"
         
         items.append(done)
-        items.append(notDone)
+        items.append(todo)
+        items.append(forgot)
         
         statusReminders.setItems(items)
         
