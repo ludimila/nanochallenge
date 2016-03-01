@@ -72,21 +72,13 @@
                         <label alignment="center" text="Label" id="4v2-IN-3cb"/>
                         <group width="1" alignment="center" verticalAlignment="center" id="YeW-EC-CEU">
                             <items>
-                                <button width="50" alignment="center" title="Ok" id="4ti-79-ag7">
-                                    <connections>
-                                        <action selector="doneTask" destination="bZv-gv-JDm" id="9RQ-nn-piJ"/>
-                                    </connections>
-                                </button>
-                                <button width="50" alignment="center" title="No" id="TsC-77-v9O">
-                                    <connections>
-                                        <action selector="notDoneTask" destination="bZv-gv-JDm" id="jGR-oW-bIb"/>
-                                    </connections>
-                                </button>
+                                <picker height="100" alignment="left" id="rPe-3V-MGB"/>
                             </items>
                         </group>
                     </items>
                     <connections>
                         <outlet property="detailLabel" destination="4v2-IN-3cb" id="8Vy-Vc-vD6"/>
+                        <outlet property="statusReminders" destination="rPe-3V-MGB" id="QHw-M4-ihv"/>
                     </connections>
                 </controller>
             </objects>

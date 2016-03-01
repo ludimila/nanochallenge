@@ -18,6 +18,7 @@ class DetailInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         self.detailLabel.setText(context as? String)
+        self.addData()
     
     }
 
@@ -31,12 +32,23 @@ class DetailInterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-
-
-    @IBAction func doneTask() {
-    }
+    @IBOutlet var statusReminders: WKInterfacePicker!
     
-    @IBAction func notDoneTask() {
-    }
     
+    func addData(){
+        
+        var items = [WKPickerItem]()
+        let done = WKPickerItem()
+        let notDone = WKPickerItem()
+        
+        done.title = "Done"
+        notDone.title = "Not Done"
+        
+        items.append(done)
+        items.append(notDone)
+        
+        statusReminders.setItems(items)
+        
+    
+    }
 }

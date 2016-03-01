@@ -6,6 +6,8 @@
 //  Copyright © 2016 BEPiD. All rights reserved.
 //
 
+
+
 import WatchKit
 import Foundation
 import EventKit
@@ -17,6 +19,7 @@ class TaskListInterfaceController: WKInterfaceController {
     var arrayData = [EKReminder]()
     var eventStore: EKEventStore!
     var reminders: [EKReminder]!
+    var events: [EKEvent]!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -31,6 +34,7 @@ class TaskListInterfaceController: WKInterfaceController {
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
         self.requestAccessReminder()
+        self.requestAccessCalendar()
     }
 
     override func didDeactivate() {
@@ -67,10 +71,10 @@ class TaskListInterfaceController: WKInterfaceController {
     
     //calendario
     
-    func requestAccessReminder(){
     
-
-        self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
+    //acessa os lembretes
+    func requestAccessReminder(){
+        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
             
             if granted{
                 let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
@@ -88,7 +92,75 @@ class TaskListInterfaceController: WKInterfaceController {
                 print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
             }
         }
+    }
     
+    
+    
+    
+   // acessa eventos calendario
+    func requestAccessCalendar(){
+    
+        self.eventStore.requestAccessToEntityType(.Event) { (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                
+                let predicate = self.eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: nil)
+                self.events = self.eventStore.eventsMatchingPredicate(predicate)
+                print(self.events)
+            
+            }else{
+                print("The app is not permitted to access calendar, make sure to grant permission in the settings and try again")
+            }
+            
+        }
     
     }
+    
+    
+    //deleta os lembretes
+    
+//    func removeReminder(array: [EKReminder]){
+//    
+//        for (index, taskName) in array.enumerate(){
+//            
+//            let reminder: EKReminder = self.reminders[index]
+//            
+//            do{
+//                
+//            
+//            }
+//            
+//            let row = tableData.rowControllerAtIndex(index) as! RowListController
+//            row.taskLabel.setText(taskName.title)
+//            
+//            self.arrayData = array
+//        }
+//
+//    
+//    }
+    
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
