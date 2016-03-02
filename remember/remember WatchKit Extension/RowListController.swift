@@ -12,8 +12,6 @@ class RowListController: NSObject {
     
     
     @IBOutlet var taskLabel: WKInterfaceLabel!
-    
-    @IBOutlet var taskTime: WKInterfaceTimer!
-    
+    @IBOutlet var taskHour: WKInterfaceLabel!
     
 }

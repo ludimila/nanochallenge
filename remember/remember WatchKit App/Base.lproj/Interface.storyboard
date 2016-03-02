@@ -41,16 +41,17 @@
                                             <label alignment="left" text="Label" id="cOj-jW-ji8">
                                                 <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
                                             </label>
-                                            <timer width="41.5" alignment="left" format="short" id="yTw-tq-xtI">
-                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                <calendarUnit key="units" hour="YES" minute="YES"/>
-                                            </timer>
+                                            <group width="1" alignment="left" id="cgL-yf-TOc">
+                                                <items>
+                                                    <label alignment="left" text="Label" id="c8W-iy-KVw"/>
+                                                </items>
+                                            </group>
                                         </items>
                                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                     </group>
                                     <connections>
+                                        <outlet property="taskHour" destination="c8W-iy-KVw" id="SCu-gz-9D9"/>
                                         <outlet property="taskLabel" destination="cOj-jW-ji8" id="Dq2-Nc-0Y2"/>
-                                        <outlet property="taskTime" destination="yTw-tq-xtI" id="lEY-0s-rgM"/>
                                         <segue destination="bZv-gv-JDm" kind="push" identifier="showDetails" id="lDl-nR-0Ja"/>
                                     </connections>
                                 </tableRow>

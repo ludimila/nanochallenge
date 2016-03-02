@@ -84,21 +84,16 @@ class TaskListInterfaceController: WKInterfaceController {
         self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
         for (index, task) in array.enumerate(){
-            
+
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             row.taskLabel.setText(task.title)
             
-            if task.completionDate != nil {
-                row.taskTime.setDate(task.completionDate!)
+            if task.dueDateComponents != nil {
+
+                row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
             }
             self.arrayData = array
         }
-        
-        
-    }
-    
-    func getHour(){
-        
         
         
     }
@@ -124,21 +119,21 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    //deleta os lembretes
-    
+//    //deleta os lembretes
+//    
 //    func removeReminder(array: [EKReminder]){
 //    
-//        for (index, taskName) in array.enumerate(){
+//        for (index, task) in array.enumerate(){
 //            
 //            let reminder: EKReminder = self.reminders[index]
 //            
 //            do{
 //                
-//            
+//                
 //            }
 //            
 //            let row = tableData.rowControllerAtIndex(index) as! RowListController
-//            row.taskLabel.setText(taskName.title)
+//            row.taskLabel.setText(task.title)
 //            
 //            self.arrayData = array
 //        }

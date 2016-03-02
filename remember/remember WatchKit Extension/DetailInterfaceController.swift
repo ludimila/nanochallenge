@@ -35,15 +35,16 @@ class DetailInterfaceController: WKInterfaceController {
     
     @IBOutlet var statusReminders: WKInterfacePicker!
     
-    
+    //
     func addData(){
         
-        let itemList: [(String, String)] = [("Item 1", "BRASEL!"),("Item 2", "To Do"),("Item 3", "Forgot it")]
+        let itemList: [(String, String)] = [("Item 1", "DONE!"),("Item 2", "To Do"),("Item 3", "Forgot it")]
    
         let pickerItems: [WKPickerItem] = itemList.map {
             let pickerItem = WKPickerItem()
             pickerItem.caption = $0.0
             pickerItem.title = $0.1
+    
             return pickerItem
         }
         
