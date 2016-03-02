@@ -18,13 +18,14 @@ class DetailInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         self.detailLabel.setText(context as? String)
-        self.addData()
     
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.addData()
+
     }
 
     override func didDeactivate() {
@@ -37,21 +38,16 @@ class DetailInterfaceController: WKInterfaceController {
     
     func addData(){
         
-        var items = [WKPickerItem]()
-        let done = WKPickerItem()
-        let forgot = WKPickerItem()
-        let todo = WKPickerItem()
+        let itemList: [(String, String)] = [("Item 1", "BRASEL!"),("Item 2", "To Do"),("Item 3", "Forgot it")]
+   
+        let pickerItems: [WKPickerItem] = itemList.map {
+            let pickerItem = WKPickerItem()
+            pickerItem.caption = $0.0
+            pickerItem.title = $0.1
+            return pickerItem
+        }
         
-        done.title = "DONE!"
-        todo.title = "To Do"
-        forgot.title = "Forgot it"
-        
-        items.append(done)
-        items.append(todo)
-        items.append(forgot)
-        
-        statusReminders.setItems(items)
-        
+        statusReminders.setItems(pickerItems)
     
     }
 }

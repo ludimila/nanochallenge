@@ -70,9 +70,9 @@
                 <controller id="bZv-gv-JDm" customClass="DetailInterfaceController" customModule="remember_WatchKit_Extension">
                     <items>
                         <label alignment="center" text="Label" id="4v2-IN-3cb"/>
-                        <group width="1" alignment="center" verticalAlignment="center" id="YeW-EC-CEU">
+                        <group width="1" height="64" alignment="center" verticalAlignment="center" id="YeW-EC-CEU">
                             <items>
-                                <picker height="100" alignment="left" id="rPe-3V-MGB"/>
+                                <picker width="136" height="40" alignment="left" verticalAlignment="center" focusStyle="stack" id="rPe-3V-MGB"/>
                             </items>
                         </group>
                     </items>

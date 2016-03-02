@@ -79,8 +79,6 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    
-    
     func putData(array: [EKReminder]){
         
         self.tableData.setNumberOfRows(array.count, withRowType: "row")
@@ -115,7 +113,7 @@ class TaskListInterfaceController: WKInterfaceController {
                 
                 let predicate = self.eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: nil)
                 self.events = self.eventStore.eventsMatchingPredicate(predicate)
-                print(self.events)
+               // print(self.events)
             
             }else{
                 print("The app is not permitted to access calendar, make sure to grant permission in the settings and try again")
@@ -151,23 +149,6 @@ class TaskListInterfaceController: WKInterfaceController {
     
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

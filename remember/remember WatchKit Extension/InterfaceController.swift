@@ -76,7 +76,6 @@ class InterfaceController: WKInterfaceController {
         return nil
     }
     
-    
     func getDayOfWeek(){
         let todayDate = NSDate()
         let formatter  = NSDateFormatter()
