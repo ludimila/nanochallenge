@@ -85,15 +85,13 @@ class TaskListInterfaceController: WKInterfaceController {
         
         self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
-        for (index, taskName) in array.enumerate(){
+        for (index, task) in array.enumerate(){
             
-            print(array[index])
-        
             let row = tableData.rowControllerAtIndex(index) as! RowListController
-            row.taskLabel.setText(taskName.title)
+            row.taskLabel.setText(task.title)
             
-            if taskName.completionDate != nil {
-                row.taskTime.setDate(taskName.completionDate!)
+            if task.completionDate != nil {
+                row.taskTime.setDate(task.completionDate!)
             }
             self.arrayData = array
         }
