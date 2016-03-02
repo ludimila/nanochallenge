@@ -21,6 +21,12 @@
 		932909CE1C7BA17400C24500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 932909CD1C7BA17400C24500 /* Assets.xcassets */; };
 		9342A26A1C7CD997009A28A8 /* TaskListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */; };
 		9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342A26B1C7CEE66009A28A8 /* RowListController.swift */; };
+		93CEEFD91C876F7700CE2952 /* SF-Compact-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */; };
+		93CEEFDA1C876F7800CE2952 /* SF-Compact-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */; };
+		93CEEFDB1C876F7A00CE2952 /* SF-Compact-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */; };
+		93CEEFDC1C876F7D00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */; };
+		93CEEFDD1C876F7D00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */; };
+		93CEEFDE1C876F7E00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */; };
 		93E3EE421C7F93D000F13157 /* DetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +91,8 @@
 		932909CF1C7BA17400C24500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListInterfaceController.swift; sourceTree = "<group>"; };
 		9342A26B1C7CEE66009A28A8 /* RowListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowListController.swift; sourceTree = "<group>"; };
+		93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Semibold.otf"; sourceTree = "<group>"; };
+		93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Light.otf"; sourceTree = "<group>"; };
 		93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInterfaceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +167,8 @@
 				93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */,
 				932909CD1C7BA17400C24500 /* Assets.xcassets */,
 				932909CF1C7BA17400C24500 /* Info.plist */,
+				93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */,
+				93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */,
 			);
 			path = "remember WatchKit Extension";
 			sourceTree = "<group>";
@@ -265,6 +275,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93CEEFDC1C876F7D00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */,
+				93CEEFDB1C876F7A00CE2952 /* SF-Compact-Text-Light.otf in Resources */,
 				932909B11C7BA17400C24500 /* LaunchScreen.storyboard in Resources */,
 				932909AE1C7BA17400C24500 /* Assets.xcassets in Resources */,
 				932909AC1C7BA17400C24500 /* Main.storyboard in Resources */,
@@ -277,6 +289,8 @@
 			files = (
 				932909BE1C7BA17400C24500 /* Assets.xcassets in Resources */,
 				932909BC1C7BA17400C24500 /* Interface.storyboard in Resources */,
+				93CEEFDD1C876F7D00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */,
+				93CEEFD91C876F7700CE2952 /* SF-Compact-Text-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +298,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93CEEFDE1C876F7E00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */,
+				93CEEFDA1C876F7800CE2952 /* SF-Compact-Text-Light.otf in Resources */,
 				932909CE1C7BA17400C24500 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

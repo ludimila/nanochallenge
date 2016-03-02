@@ -44,9 +44,34 @@ class DetailInterfaceController: WKInterfaceController {
             let pickerItem = WKPickerItem()
             pickerItem.caption = $0.0
             pickerItem.title = $0.1
+            
+            
+//            for index in 0...2{
+//                
+//                switch(index){
+//                case 0:
+//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.greenColor()]
+//                    
+//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
+//                    pickerItem.title = ("\(atributtedString)")
+//                case 1:
+//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.orangeColor()]
+//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
+//                    pickerItem.title = ("\(atributtedString)")
+//                case 2:
+//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
+//                    pickerItem.title = ("\(atributtedString)")            default:
+//                        print("Deu ruim")
+//                }//fim switch
+//            
+//            
+//            }//fim for
+            
+            
     
             return pickerItem
-        }
+        }//fim map
         
         statusReminders.setItems(pickerItems)
     

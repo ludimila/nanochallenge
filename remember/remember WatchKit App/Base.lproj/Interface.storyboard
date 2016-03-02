@@ -4,6 +4,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SF-Compact-Text-Light.otf">
+            <string>SFCompactText-Light</string>
+        </mutableArray>
+        <mutableArray key="SF-Compact-Text-Semibold.otf">
+            <string>SFCompactText-Semibold</string>
+            <string>SFCompactText-Semibold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
@@ -13,6 +22,7 @@
                         <group width="135" height="135" alignment="center" verticalAlignment="center" backgroundImage="greenDay0" id="mtb-E9-Y7M">
                             <items>
                                 <button width="120" height="120" alignment="center" verticalAlignment="center" title="Button" id="5yD-II-aMG">
+                                    <fontDescription key="font" name="SFCompactText-Semibold" family="SF Compact Text" pointSize="17"/>
                                     <connections>
                                         <segue destination="4mO-hO-Wf5" kind="push" identifier="showAll" id="Tra-55-iyN"/>
                                     </connections>
@@ -36,20 +46,31 @@
                         <table alignment="left" id="ALi-He-PY8">
                             <items>
                                 <tableRow identifier="row" id="NFD-Pd-HsU" customClass="RowListController" customModule="remember_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="51.5" alignment="left" layout="vertical" id="4Pv-RC-59E">
+                                    <group key="rootItem" width="1" height="51.5" alignment="left" id="4Pv-RC-59E">
                                         <items>
-                                            <label alignment="left" text="Label" id="cOj-jW-ji8">
-                                                <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                                            </label>
-                                            <group width="1" alignment="left" id="cgL-yf-TOc">
+                                            <group width="99" alignment="left" layout="vertical" id="cgL-yf-TOc">
                                                 <items>
-                                                    <label alignment="left" text="Label" id="c8W-iy-KVw"/>
+                                                    <group width="1" alignment="left" layout="vertical" id="bCg-hH-ujf">
+                                                        <items>
+                                                            <label alignment="left" text="Label" id="cOj-jW-ji8">
+                                                                <fontDescription key="font" name="SFCompactText-Semibold" family="SF Compact Text" pointSize="17"/>
+                                                            </label>
+                                                            <label alignment="left" text="Label" id="c8W-iy-KVw">
+                                                                <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="font" name="SFCompactText-Light" family="SF Compact Text" pointSize="15"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
                                                 </items>
                                             </group>
+                                            <separator alignment="right" verticalAlignment="center" id="M1j-Mq-90V">
+                                                <color key="color" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </separator>
                                         </items>
                                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                     </group>
                                     <connections>
+                                        <outlet property="separator" destination="M1j-Mq-90V" id="Dbv-mS-yrY"/>
                                         <outlet property="taskHour" destination="c8W-iy-KVw" id="SCu-gz-9D9"/>
                                         <outlet property="taskLabel" destination="cOj-jW-ji8" id="Dq2-Nc-0Y2"/>
                                         <segue destination="bZv-gv-JDm" kind="push" identifier="showDetails" id="lDl-nR-0Ja"/>
@@ -73,7 +94,7 @@
                         <label alignment="center" text="Label" id="4v2-IN-3cb"/>
                         <group width="1" height="64" alignment="center" verticalAlignment="center" id="YeW-EC-CEU">
                             <items>
-                                <picker width="136" height="40" alignment="left" verticalAlignment="center" focusStyle="stack" id="rPe-3V-MGB"/>
+                                <picker width="136" height="40" alignment="center" verticalAlignment="center" focusStyle="stack" id="rPe-3V-MGB"/>
                             </items>
                         </group>
                     </items>

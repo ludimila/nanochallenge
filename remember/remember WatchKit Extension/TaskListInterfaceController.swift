@@ -24,6 +24,11 @@ class TaskListInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
+        self.eventStore = EKEventStore()
+        self.reminders = [EKReminder]()
+        self.requestAccessReminder()
+        self.requestAccessCalendar()
+        
     }
 
     override func willActivate() {
@@ -31,10 +36,7 @@ class TaskListInterfaceController: WKInterfaceController {
         super.willActivate()
         
         
-        self.eventStore = EKEventStore()
-        self.reminders = [EKReminder]()
-        self.requestAccessReminder()
-        self.requestAccessCalendar()
+        
     }
 
     override func didDeactivate() {
@@ -85,6 +87,7 @@ class TaskListInterfaceController: WKInterfaceController {
         
         for (index, task) in array.enumerate(){
 
+
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             row.taskLabel.setText(task.title)
             
@@ -92,12 +95,34 @@ class TaskListInterfaceController: WKInterfaceController {
 
                 row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
             }
+            
+            self.managePriority(task.priority,row: row)
+    
             self.arrayData = array
         }
         
         
     }
     
+    
+    //seta a cor do separator de acordo com a prioridade da task
+    func managePriority(prioprity: Int, row: RowListController){
+        
+        switch(prioprity){
+        
+        case 0:
+            row.separator.setColor(UIColor.whiteColor())
+        case 9:
+            row.separator.setColor(UIColor.greenColor())
+        case 5:
+            row.separator.setColor(UIColor.yellowColor())
+        case 1:
+            row.separator.setColor(UIColor.redColor())
+        default:
+            print("Deu ruim no separator")
+        }
+    
+    }
     
    // acessa eventos calendario
     func requestAccessCalendar(){

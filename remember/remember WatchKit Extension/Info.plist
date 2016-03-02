@@ -36,5 +36,10 @@
 	<string>$(PRODUCT_MODULE_NAME).InterfaceController</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Compact-Text-Light.otf</string>
+		<string>SF-Compact-Text-Semibold.otf</string>
+	</array>
 </dict>
 </plist>
