@@ -47,14 +47,13 @@ class TaskListInterfaceController: WKInterfaceController {
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
         if segueIdentifier == "showDetails"{
-           return self.arrayData[rowIndex].title
+           return self.arrayData[rowIndex]
         }
         
         return nil
     }
     
     
-    //calendario
     
     
     //acessa os lembretes
@@ -80,12 +79,14 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
+    
+    
+    //preenche a table com os lembretes
     func putData(array: [EKReminder]){
         
         self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
         for (index, task) in array.enumerate(){
-
 
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             row.taskLabel.setText(task.title)
@@ -97,11 +98,7 @@ class TaskListInterfaceController: WKInterfaceController {
             
             self.managePriority(task.priority,row: row)
             self.arrayData = array
-            
         }
-        
-        
-        
     }
     
     
@@ -125,7 +122,7 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    
+    //chama a tela com o dictation - REMOVER ESSE METODO INUTIL
     override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
         
         if segueIdentifier == "newReminder"{

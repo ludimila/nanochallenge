@@ -8,16 +8,20 @@
 
 import WatchKit
 import Foundation
+import EventKit
 
 
 class DetailInterfaceController: WKInterfaceController {
 
     @IBOutlet var detailLabel: WKInterfaceLabel!
     
+    var reminder = EKReminder()
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        self.detailLabel.setText(context as? String)
+        self.reminder = (context as? EKReminder)!
+        self.detailLabel.setText(reminder.title)
     
     }
 
@@ -67,8 +71,6 @@ class DetailInterfaceController: WKInterfaceController {
 //            
 //            
 //            }//fim for
-            
-            
     
             return pickerItem
         }//fim map

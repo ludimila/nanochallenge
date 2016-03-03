@@ -41,12 +41,14 @@ class InterfaceController: WKInterfaceController {
     }
     
     
-    
+    //seta o botao como transparente
     func configureButton(){
     
         self.tasksButton.setBackgroundColor(UIColor.clearColor())
 
     }
+    
+    
     
     //acessa os lembretes
     func requestAccessReminder(){
@@ -70,11 +72,12 @@ class InterfaceController: WKInterfaceController {
     }
     
     
+    
+    //conta o total de lembretes
     func getAllTasks(tasks: [EKReminder]){
         
         var completed = 0
         var notCompleted = 0
-        
         
         for (_, task) in tasks.enumerate(){
             
@@ -91,6 +94,8 @@ class InterfaceController: WKInterfaceController {
     }// fim getalltasks
     
     
+    
+    //seta a cor de acordo com a quantidade de tarefas do dia
     func completedTasks(numberOfTasks: Int){
         
         if numberOfTasks <= 10 {
@@ -107,6 +112,8 @@ class InterfaceController: WKInterfaceController {
     }//fim completedTasks
 
     
+    
+    //pega o nome do dia da semana
     func getDayOfWeek(){
         let todayDate = NSDate()
         let formatter  = NSDateFormatter()
