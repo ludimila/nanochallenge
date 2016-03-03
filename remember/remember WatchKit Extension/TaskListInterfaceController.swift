@@ -27,7 +27,6 @@ class TaskListInterfaceController: WKInterfaceController {
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
         self.requestAccessReminder()
-        self.requestAccessCalendar()
         
     }
 
@@ -97,9 +96,10 @@ class TaskListInterfaceController: WKInterfaceController {
             }
             
             self.managePriority(task.priority,row: row)
-    
             self.arrayData = array
+            
         }
+        
         
         
     }
@@ -124,51 +124,22 @@ class TaskListInterfaceController: WKInterfaceController {
     
     }
     
-   // acessa eventos calendario
-    func requestAccessCalendar(){
     
-        self.eventStore.requestAccessToEntityType(.Event) { (granted: Bool, error: NSError?) -> Void in
+    
+    override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
+        
+        if segueIdentifier == "newReminder"{
             
-            if granted{
-                
-                let predicate = self.eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: nil)
-                self.events = self.eventStore.eventsMatchingPredicate(predicate)
-               // print(self.events)
+            return "oi"
             
-            }else{
-                print("The app is not permitted to access calendar, make sure to grant permission in the settings and try again")
-            }
-            
+        }else{
+            return nil
         }
-    
-    }
-    
-    
-//    //deleta os lembretes
-//    
-//    func removeReminder(array: [EKReminder]){
-//    
-//        for (index, task) in array.enumerate(){
-//            
-//            let reminder: EKReminder = self.reminders[index]
-//            
-//            do{
-//                
-//                
-//            }
-//            
-//            let row = tableData.rowControllerAtIndex(index) as! RowListController
-//            row.taskLabel.setText(task.title)
-//            
-//            self.arrayData = array
-//        }
-//
-//    
-//    }
+    }//fim segue
     
     
     
-}
+}//fim classe
 
 
 

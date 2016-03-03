@@ -78,6 +78,11 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <button width="1" alignment="left" title="New" id="XqK-Jz-ptj">
+                            <connections>
+                                <segue destination="Bq6-xE-xeQ" kind="push" identifier="newReminder" id="2RJ-Re-hcO"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="tableData" destination="ALi-He-PY8" id="cLE-RF-Oto"/>
@@ -85,6 +90,25 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="277" y="225"/>
+        </scene>
+        <!--New Reminder-->
+        <scene sceneID="sEv-jR-mlv">
+            <objects>
+                <controller id="Bq6-xE-xeQ" customClass="NewReminder" customModule="remember_WatchKit_Extension">
+                    <items>
+                        <label alignment="center" text="Reminder" id="xhW-Yh-Iaf"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Save" id="b7z-ww-YSO">
+                            <connections>
+                                <action selector="saveReminder" destination="Bq6-xE-xeQ" id="sCU-rF-UeB"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="teste" destination="xhW-Yh-Iaf" id="Sp5-qZ-l8i"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="277" y="581"/>
         </scene>
         <!--Detail Interface Controller-->
         <scene sceneID="bvr-MM-Ve1">

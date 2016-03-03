@@ -28,6 +28,7 @@
 		93CEEFDD1C876F7D00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */; };
 		93CEEFDE1C876F7E00CE2952 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */; };
 		93E3EE421C7F93D000F13157 /* DetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */; };
+		93F23CAE1C88A9B0008E5803 /* NewReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F23CAD1C88A9B0008E5803 /* NewReminder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		93CEEFD71C876F3C00CE2952 /* SF-Compact-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Semibold.otf"; sourceTree = "<group>"; };
 		93CEEFD81C876F5D00CE2952 /* SF-Compact-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Light.otf"; sourceTree = "<group>"; };
 		93E3EE411C7F93D000F13157 /* DetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInterfaceController.swift; sourceTree = "<group>"; };
+		93F23CAD1C88A9B0008E5803 /* NewReminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReminder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				932909C91C7BA17400C24500 /* InterfaceController.swift */,
+				93F23CAD1C88A9B0008E5803 /* NewReminder.swift */,
 				9342A2691C7CD997009A28A8 /* TaskListInterfaceController.swift */,
 				9342A26B1C7CEE66009A28A8 /* RowListController.swift */,
 				932909CB1C7BA17400C24500 /* ExtensionDelegate.swift */,
@@ -320,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93F23CAE1C88A9B0008E5803 /* NewReminder.swift in Sources */,
 				932909CC1C7BA17400C24500 /* ExtensionDelegate.swift in Sources */,
 				932909CA1C7BA17400C24500 /* InterfaceController.swift in Sources */,
 				9342A26C1C7CEE66009A28A8 /* RowListController.swift in Sources */,
