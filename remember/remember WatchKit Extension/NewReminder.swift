@@ -8,6 +8,8 @@
 
 import WatchKit
 import EventKit
+import Foundation
+
 
 class NewReminder: WKInterfaceController {
     

@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import EventKit
 
 
 class InterfaceController: WKInterfaceController {
@@ -15,12 +16,9 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var groupTasks: WKInterfaceGroup!
     @IBOutlet var tasksButton: WKInterfaceButton!
     
-    
-    var professionalArray = ["Meeting", "Video Call", "Send Email"]
-    var personalArray = ["Eat", "Netfeliz", "Date"]
-    var secretArray = ["Impeachment", "Bater panela", "Roubar geladeira"]
-    
-    
+    var eventStore = EKEventStore()
+    var reminders: [EKReminder]!
+
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
     
@@ -30,10 +28,9 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        
-        self.completedTasks(10)
-        self.configureButton()
         self.getDayOfWeek()
+        self.requestAccessReminder()
+        self.configureButton()
         
     }
     
@@ -47,10 +44,52 @@ class InterfaceController: WKInterfaceController {
     
     func configureButton(){
     
-        self.tasksButton.setTitle("Hoje")
         self.tasksButton.setBackgroundColor(UIColor.clearColor())
 
     }
+    
+    //acessa os lembretes
+    func requestAccessReminder(){
+        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    self.reminders = reminders
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.getAllTasks(reminders!)
+                    }
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
+        }
+    }
+    
+    
+    func getAllTasks(tasks: [EKReminder]){
+        
+        var completed = 0
+        var notCompleted = 0
+        
+        
+        for (_, task) in tasks.enumerate(){
+            
+            
+            if task.completed == true {
+                completed++
+            }else{
+                notCompleted++
+            }
+        }//fim for
+
+        self.completedTasks(completed+notCompleted)
+        
+    }// fim getalltasks
+    
     
     func completedTasks(numberOfTasks: Int){
         
@@ -68,14 +107,6 @@ class InterfaceController: WKInterfaceController {
     }//fim completedTasks
 
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
-        
-        if segueIdentifier == "showAll"{
-            return self.professionalArray
-        }
-        return nil
-    }
-    
     func getDayOfWeek(){
         let todayDate = NSDate()
         let formatter  = NSDateFormatter()
@@ -83,8 +114,8 @@ class InterfaceController: WKInterfaceController {
         let convertToString = formatter.stringFromDate(todayDate)
         self.tasksButton.setTitle(convertToString)
         
+        
     }
-    
 }//fim classe
 
 
