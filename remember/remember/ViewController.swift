@@ -8,16 +8,19 @@
 
 import UIKit
 import EventKit
+import WatchConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WCSessionDelegate{
 
+    var reminder = String()
+    var session: WCSession!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        
+        self.setupWatchConnectivity()
+        session.sendMessage(["a":"hello"], replyHandler: nil, errorHandler: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,5 +29,33 @@ class ViewController: UIViewController {
     }
 
 
-}
+    
+    //metodos de conectividade
+    
+    // Do any additional setup after loading the view, typically from a nib.
+    func setupWatchConnectivity() {
+        
+        if(WCSession.isSupported()){
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
+        }
+    }
+    
+    
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+        //recieve messages from watch
+        
+        self.reminder = (message["b"]! as? String)!
+        dispatch_async(dispatch_get_main_queue(), {
+            self.reminder = (message["b"]! as? String)!
+            print(self.reminder)
+            })
+    }
+
+    
+    
+    
+}//FIM CLASSE
 

@@ -9,19 +9,28 @@
 import WatchKit
 import Foundation
 import EventKit
+import WatchConnectivity
 
 
-class DetailInterfaceController: WKInterfaceController {
+class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var detailLabel: WKInterfaceLabel!
     
     var reminder = EKReminder()
+    var saveString = [String]()
+    var session:WCSession!
+    var message = String()
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
         self.reminder = (context as? EKReminder)!
         self.detailLabel.setText(reminder.title)
+        self.setupWatchConnectivity()
+        
+        if(WCSession.isSupported()){
+            session.sendMessage(["b":"goodBye"], replyHandler: nil, errorHandler: nil)
+        }
     
     }
 
@@ -48,34 +57,52 @@ class DetailInterfaceController: WKInterfaceController {
             let pickerItem = WKPickerItem()
             pickerItem.caption = $0.0
             pickerItem.title = $0.1
+            print(pickerItem.title)
             
+            self.saveString.append(pickerItem.title!)
             
-//            for index in 0...2{
-//                
-//                switch(index){
-//                case 0:
-//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.greenColor()]
-//                    
-//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
-//                    pickerItem.title = ("\(atributtedString)")
-//                case 1:
-//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.orangeColor()]
-//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
-//                    pickerItem.title = ("\(atributtedString)")
-//                case 2:
-//                    let attr = [NSFontAttributeName : UIFont(name: "SF-Compact-Text-Semibold", size: 15)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
-//                    let atributtedString = NSAttributedString(string: pickerItem.title!, attributes: attr)
-//                    pickerItem.title = ("\(atributtedString)")            default:
-//                        print("Deu ruim")
-//                }//fim switch
-//            
-//            
-//            }//fim for
     
             return pickerItem
         }//fim map
+    
         
         statusReminders.setItems(pickerItems)
     
     }
+    
+    @IBAction func saveReminder() {
+        
+        if self.saveString[0] == "DONE!"{
+            self.reminder.completed = true
+            self.reminder.completionDate = NSDate()
+            
+        }else if self.saveString[1] == "To Do"{
+            
+            self.reminder.completed = false
+            
+        }else{
+            
+            self.reminder.completed = false
+        }
+    }
+    
+    
+    
+    //conectividade do lado do watch
+    func setupWatchConnectivity() {
+        
+        if(WCSession.isSupported()){
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
+        }
+    }
+    
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+         self.message = (message["a"]! as? String)!
+        print(message)
+    }
+    
+    
 }
