@@ -40,10 +40,11 @@ class NewReminder: WKInterfaceController {
     @IBAction func saveReminder() {
         
         presentTextInputControllerWithSuggestions([""], allowedInputMode: .Plain) { (results) -> Void in
-            
             if results != nil{
                 let dict = results
                 self.teste.setText(dict?.first as? String)
+                
+                
             }
             
         }

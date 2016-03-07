@@ -54,8 +54,6 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    
-    
     //acessa os lembretes
     func requestAccessReminder(){
         self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
@@ -79,22 +77,44 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
+
     
     
-    //preenche a table com os lembretes
+    //preenche a table com os lembretes do dia de hoje
     func putData(array: [EKReminder]){
         
-        self.tableData.setNumberOfRows(array.count, withRowType: "row")
+        var arrayReminder = [EKReminder]()
+        let today = NSDate()
+        
+        let todayDate = self.getDayOfReminder(today)
         
         for (index, task) in array.enumerate(){
-
-            let row = tableData.rowControllerAtIndex(index) as! RowListController
-            row.taskLabel.setText(task.title)
-            
-            if task.dueDateComponents != nil {
-
-                row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
+        
+            if self.getDayOfReminder(task.dueDateComponents!.date!) == todayDate {
+                arrayReminder.append(task)
             }
+        }
+        
+        self.tableData.setNumberOfRows(arrayReminder.count, withRowType: "row")
+        
+        for (index, task) in arrayReminder.enumerate(){
+            
+            let row = tableData.rowControllerAtIndex(index) as! RowListController
+            let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
+            
+           
+            if todayDate == taskDay {
+                row.taskLabel.setText(task.title)
+            
+                if task.dueDateComponents != nil {
+                    row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
+                }//fim due date
+
+            }else{
+                row.taskLabel.setTextColor(UIColor.clearColor())
+                row.taskHour.setTextColor(UIColor.clearColor())
+                
+            }//fim if compara se a task é de hoje
             
             self.managePriority(task.priority,row: row)
             self.arrayData = array
@@ -106,7 +126,6 @@ class TaskListInterfaceController: WKInterfaceController {
     func managePriority(prioprity: Int, row: RowListController){
         
         switch(prioprity){
-        
         case 0:
             row.separator.setColor(UIColor.whiteColor())
         case 9:
@@ -116,7 +135,7 @@ class TaskListInterfaceController: WKInterfaceController {
         case 1:
             row.separator.setColor(UIColor.redColor())
         default:
-            print("Deu ruim no separator")
+            break
         }
     
     }
@@ -134,6 +153,18 @@ class TaskListInterfaceController: WKInterfaceController {
         }
     }//fim segue
     
+    
+    
+    
+    //pega o nome do dia da semana
+    func getDayOfReminder(date: NSDate) -> String{
+        
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let convertToString = formatter.stringFromDate(date)
+        
+        return convertToString
+    }
     
     
 }//fim classe

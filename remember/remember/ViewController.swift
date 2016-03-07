@@ -50,7 +50,7 @@ class ViewController: UIViewController, WCSessionDelegate{
         self.reminder = (message["b"]! as? String)!
         dispatch_async(dispatch_get_main_queue(), {
             self.reminder = (message["b"]! as? String)!
-            print(self.reminder)
+
             })
     }
 

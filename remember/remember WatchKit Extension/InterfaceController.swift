@@ -106,7 +106,7 @@ class InterfaceController: WKInterfaceController {
             self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 15), duration: 4, repeatCount: 1)
         }else{
             self.groupTasks.setBackgroundImageNamed("redDay")
-            self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 20), duration: 4, repeatCount: 1)
+            self.groupTasks.startAnimatingWithImagesInRange(NSMakeRange(0, 21), duration: 4, repeatCount: 1)
         }
         
     }//fim completedTasks

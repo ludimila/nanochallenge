@@ -57,7 +57,6 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
             let pickerItem = WKPickerItem()
             pickerItem.caption = $0.0
             pickerItem.title = $0.1
-            print(pickerItem.title)
             
             self.saveString.append(pickerItem.title!)
             
@@ -73,9 +72,9 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func saveReminder() {
         
         if self.saveString[0] == "DONE!"{
+            
             self.reminder.completed = true
             self.reminder.completionDate = NSDate()
-            
         }else if self.saveString[1] == "To Do"{
             
             self.reminder.completed = false
@@ -84,6 +83,8 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
             
             self.reminder.completed = false
         }
+        
+        
     }
     
     
@@ -101,7 +102,6 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
          self.message = (message["a"]! as? String)!
-        print(message)
     }
     
     
