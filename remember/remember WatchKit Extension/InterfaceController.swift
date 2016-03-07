@@ -17,7 +17,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var tasksButton: WKInterfaceButton!
     
     var eventStore = EKEventStore()
-    var reminders: [EKReminder]!
+    static var reminders: [EKReminder]!
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -58,11 +58,11 @@ class InterfaceController: WKInterfaceController {
                 let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
                 self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
                     
-                    self.reminders = reminders
+                   InterfaceController.reminders = reminders
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        self.getAllTasks(reminders!)
+                        self.getAllTasks(InterfaceController.reminders)
                     }
                 })
             }else{

@@ -16,6 +16,8 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var detailLabel: WKInterfaceLabel!
     
+    static var minhavariavel  = "OK"
+    
     var reminder = EKReminder()
     var saveString = [String]()
     var session:WCSession!
@@ -75,6 +77,8 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
             
             self.reminder.completed = true
             self.reminder.completionDate = NSDate()
+            self.reminder.title = "Save"
+            
         }else if self.saveString[1] == "To Do"{
             
             self.reminder.completed = false
@@ -83,8 +87,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
             
             self.reminder.completed = false
         }
-        
-        
+        self.popController()
     }
     
     

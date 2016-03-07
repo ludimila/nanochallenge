@@ -22,7 +22,6 @@ class NewReminder: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
         self.eventStore = (context as! String)
         
     }

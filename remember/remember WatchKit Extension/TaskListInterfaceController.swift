@@ -26,7 +26,8 @@ class TaskListInterfaceController: WKInterfaceController {
         
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
-        self.requestAccessReminder()
+       // self.requestAccessReminder()
+        self.putData(InterfaceController.reminders)
         
     }
 
@@ -53,33 +54,7 @@ class TaskListInterfaceController: WKInterfaceController {
         return nil
     }
     
-    
-    //acessa os lembretes
-    func requestAccessReminder(){
-        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
-            
-            if granted{
-                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                    self.reminders = reminders
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
 
-                        self.putData(reminders!)
- 
-                    }
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
-            }
-        }
-    }
-    
-    
-
-    
-    
     //preenche a table com os lembretes do dia de hoje
     func putData(array: [EKReminder]){
         
@@ -88,36 +63,32 @@ class TaskListInterfaceController: WKInterfaceController {
         
         let todayDate = self.getDayOfReminder(today)
         
-        for (index, task) in array.enumerate(){
+        
+        //pega todo o array de lembretes e separa os que são de hoje
+        for (_, task) in array.enumerate(){
         
             if self.getDayOfReminder(task.dueDateComponents!.date!) == todayDate {
                 arrayReminder.append(task)
             }
         }
         
+        //apenas os lembretes de hoje
         self.tableData.setNumberOfRows(arrayReminder.count, withRowType: "row")
         
         for (index, task) in arrayReminder.enumerate(){
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
-            let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
+            //let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
             
-           
-            if todayDate == taskDay {
-                row.taskLabel.setText(task.title)
+            row.taskLabel.setText(task.title)
             
-                if task.dueDateComponents != nil {
-                    row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
-                }//fim due date
+            if task.dueDateComponents != nil {
+                row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
+            }//fim due date
 
-            }else{
-                row.taskLabel.setTextColor(UIColor.clearColor())
-                row.taskHour.setTextColor(UIColor.clearColor())
                 
-            }//fim if compara se a task é de hoje
-            
             self.managePriority(task.priority,row: row)
-            self.arrayData = array
+            self.arrayData = arrayReminder
         }
     }
     
