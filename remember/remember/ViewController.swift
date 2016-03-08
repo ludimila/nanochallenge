@@ -54,31 +54,36 @@ class ViewController: UIViewController, WCSessionDelegate{
     
         
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        //recieve messages from watch
-        
-        self.reminderTitle = (message["title"]! as? String)!
-//        self.reminderCompletionDate = (message["completioDate"]! as? String)!
-//        self.reminderDueDate = (message["dueDate"]! as? String)!
-//        self.reminderPriority = (message["priority"]! as? String)!
-//        self.reminderIdentifier = (message["identifier"]! as? String)!
+//    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+//        //recieve messages from watch
+//        
+//        self.reminderTitle = (message["title"]! as? String)!
+////        self.reminderCompletionDate = (message["completioDate"]! as? String)!
+////        self.reminderDueDate = (message["dueDate"]! as? String)!
+////        self.reminderPriority = (message["priority"]! as? String)!
+////        self.reminderIdentifier = (message["identifier"]! as? String)!
+//
+//        
+//        dispatch_async(dispatch_get_main_queue(), {
+//
+//            self.reminderTitle = (message["title"]! as? String)!
+////            self.reminderCompletionDate = (message["completioDate"]! as? String)!
+////            self.reminderDueDate = (message["dueDate"]! as? String)!
+////            self.reminderPriority = (message["priority"]! as? String)!
+////            self.reminderIdentifier = (message["identifier"]! as? String)!
+////            print(self.reminderTitle)
+//            self.label.text = (message["title"]! as? String)!
+//
+//            
+//            })
+//        
+//    }
 
-        
-        dispatch_async(dispatch_get_main_queue(), {
-
-            self.reminderTitle = (message["title"]! as? String)!
-//            self.reminderCompletionDate = (message["completioDate"]! as? String)!
-//            self.reminderDueDate = (message["dueDate"]! as? String)!
-//            self.reminderPriority = (message["priority"]! as? String)!
-//            self.reminderIdentifier = (message["identifier"]! as? String)!
-//            print(self.reminderTitle)
-            self.label.text = (message["title"]! as? String)!
-
-            
-            })
-        
+    
+    
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        self.label.text = (userInfo["title"] as! String)
     }
-
     
     
     

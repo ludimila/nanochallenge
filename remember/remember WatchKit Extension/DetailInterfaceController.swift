@@ -112,7 +112,9 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
                 
                 if(WCSession.isSupported()){
                     
-                    session.sendMessage(["title":self.reminderTitle], replyHandler: nil, errorHandler: nil)
+                    self.transferUserInfo(["title" : task.title])
+                    
+//                    session.sendMessage(["title":self.reminderTitle], replyHandler: nil, errorHandler: nil)
 //                    session.sendMessage(["completionDate":self.reminderCompletionDate], replyHandler: nil, errorHandler: nil)
 //                    session.sendMessage(["dueDate":self.reminderDueDate], replyHandler: nil, errorHandler: nil)
 //                    session.sendMessage(["priority":self.reminderPriority], replyHandler: nil, errorHandler: nil)
@@ -125,6 +127,10 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
+    
+    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
+        return session?.transferUserInfo(userInfo)
+    }
     
     func makeString(reminder: EKReminder){
     
