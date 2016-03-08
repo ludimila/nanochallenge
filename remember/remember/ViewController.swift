@@ -39,6 +39,7 @@ class ViewController: UIViewController, WCSessionDelegate{
     }
 
 
+    @IBOutlet weak var prio: UILabel!
     
     //metodos de conectividade
     
@@ -52,27 +53,30 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     }
     
-        
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+
+    
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        
         //recieve messages from watch
         
-        self.reminderTitle = (message["title"]! as? String)!
-//        self.reminderCompletionDate = (message["completioDate"]! as? String)!
-//        self.reminderDueDate = (message["dueDate"]! as? String)!
-//        self.reminderPriority = (message["priority"]! as? String)!
-//        self.reminderIdentifier = (message["identifier"]! as? String)!
+        self.reminderTitle = (userInfo["title"]! as? String)!
+//        self.reminderCompletionDate = (userInfo["completioDate"]! as? String)!
+//        self.reminderDueDate = (userInfo["dueDate"]! as? String)!
+        self.reminderPriority = (userInfo["priority"]! as? String)!
+//        self.reminderIdentifier = (userInfo["identifier"]! as? String)!
 
         
         dispatch_async(dispatch_get_main_queue(), {
 
-            self.reminderTitle = (message["title"]! as? String)!
-//            self.reminderCompletionDate = (message["completioDate"]! as? String)!
-//            self.reminderDueDate = (message["dueDate"]! as? String)!
-//            self.reminderPriority = (message["priority"]! as? String)!
-//            self.reminderIdentifier = (message["identifier"]! as? String)!
-//            print(self.reminderTitle)
-            self.label.text = (message["title"]! as? String)!
+            self.reminderTitle = (userInfo["title"]! as? String)!
+//            self.reminderCompletionDate = (userInfo["completioDate"]! as? String)!
+//            self.reminderDueDate = (userInfo["dueDate"]! as? String)!
+            self.reminderPriority = (userInfo["priority"]! as? String)!
+//            self.reminderIdentifier = (userInfo["identifier"]! as? String)!
+            print(self.reminderTitle)
+            self.label.text = (userInfo["title"]! as? String)!
+            self.prio.text = (userInfo["priority"]! as? String)!
 
             
             })
