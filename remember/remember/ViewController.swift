@@ -13,13 +13,20 @@ import WatchConnectivity
 class ViewController: UIViewController, WCSessionDelegate{
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var prio: UILabel!
     
+    
+    
+
     var reminder = EKReminder()
-    var session: WCSession!
     var eventStore = EKEventStore()
     
-    var teste = [String]()
+    var arrayReminderWatch = [String]()
     
+    
+    
+    //WatchConnectivity
+    var session: WCSession!
     var reminderTitle = String()
     var reminderCompletionDate = String()
     var reminderDueDate = String()
@@ -32,7 +39,7 @@ class ViewController: UIViewController, WCSessionDelegate{
         
         self.setupWatchConnectivity()
         session.sendMessage(["a":"Conexão estabelecida"], replyHandler: nil, errorHandler: nil)
-    }
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,7 +47,6 @@ class ViewController: UIViewController, WCSessionDelegate{
     }
 
 
-    @IBOutlet weak var prio: UILabel!
     
     //metodos de conectividade
     
@@ -54,15 +60,63 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     }
     
-    
-    
+    //recebe os dados do watch
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
         
-        self.teste = (userInfo["reminder"] as! [String])
+        self.arrayReminderWatch = (userInfo["reminder"] as! [String])
+        self.reminderTitle = self.arrayReminderWatch.first!
         
-        self.label.text = self.teste.first
-        self.prio.text = self.teste[0]
+        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.compareReminders(reminders!)
+                        
+                        
+                    }
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+
+            }
+        }
+        
+        
+        
+
     }
+    
+    
+    
+    
+    //compara reminder do watch com reminder do iphone antes de fazer as modificações
+    
+    func compareReminders(remindersIphone: [EKReminder]){
+    
+        
+        for (_, task) in remindersIphone.enumerate(){
+        
+            if task.title == self.arrayReminderWatch.first{
+                
+                self.label.text = (self.reminderTitle)
+                self.prio.text = (task.title)
+            
+                print("Watch:    \(self.arrayReminderWatch[4])")
+                print("Iphone:   \(task.calendarItemIdentifier)")
+            
+            }
+        
+        }
+            
+
+    
+    }
+    
+    
     
 }//FIM CLASSE
 

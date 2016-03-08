@@ -90,7 +90,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         self.popController()
     }
     
-    
+    //verifica se a task atual e a original são iguais/mesmas
     func compareReminder(reminder: EKReminder){
         for (_, task) in InterfaceController.reminders.enumerate(){
         
@@ -115,6 +115,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     
     
+    //transforma os dados do lembretes em strings
     func makeString(reminder: EKReminder){
     
         self.reminderTitle = reminder.title
