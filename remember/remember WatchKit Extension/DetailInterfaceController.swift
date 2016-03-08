@@ -16,30 +16,43 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var detailLabel: WKInterfaceLabel!
     
-    static var minhavariavel  = "OK"
-    
     var reminder = EKReminder()
     var saveString = [String]()
+    
+    //watchcnonnectivity
     var session:WCSession!
-    var message = String()
+    var reminderTitle = String()
+    var reminderCompletionDate = String()
+    var reminderDueDate = String()
+    var reminderPriority = String()
+    var reminderIdentifier = String()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
         self.reminder = (context as? EKReminder)!
         self.detailLabel.setText(reminder.title)
-        self.setupWatchConnectivity()
-        
-        if(WCSession.isSupported()){
-            session.sendMessage(["b":"goodBye"], replyHandler: nil, errorHandler: nil)
-        }
-    
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         self.addData()
+        
+        self.setupWatchConnectivity()
 
     }
 
@@ -75,9 +88,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         
         if self.saveString[0] == "DONE!"{
             
-            self.reminder.completed = true
-            self.reminder.completionDate = NSDate()
-            self.reminder.title = "Save"
+           self.compareReminder(self.reminder)
             
         }else if self.saveString[1] == "To Do"{
             
@@ -87,9 +98,43 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
             
             self.reminder.completed = false
         }
+        
         self.popController()
     }
     
+    
+    func compareReminder(reminder: EKReminder){
+        for (_, task) in InterfaceController.reminders.enumerate(){
+        
+            if task == reminder{
+                
+                self.makeString(task)
+                
+                if(WCSession.isSupported()){
+                    
+                    session.sendMessage(["title":self.reminderTitle], replyHandler: nil, errorHandler: nil)
+//                    session.sendMessage(["completionDate":self.reminderCompletionDate], replyHandler: nil, errorHandler: nil)
+//                    session.sendMessage(["dueDate":self.reminderDueDate], replyHandler: nil, errorHandler: nil)
+//                    session.sendMessage(["priority":self.reminderPriority], replyHandler: nil, errorHandler: nil)
+//                    session.sendMessage(["identifier":self.reminderIdentifier], replyHandler: nil, errorHandler: nil)
+                    
+                }
+            
+            }
+            
+        }
+    }
+    
+    
+    func makeString(reminder: EKReminder){
+    
+        self.reminderTitle = "titulo"
+        self.reminderCompletionDate = "completion"
+        self.reminderDueDate = "due date"
+        self.reminderPriority = "9"
+        self.reminderIdentifier = "xxxxx"
+    
+    }
     
     
     //conectividade do lado do watch
@@ -104,8 +149,9 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-         self.message = (message["a"]! as? String)!
+         self.reminderTitle = (message["a"]! as? String)!
+        print(self.reminderTitle)
+
     }
-    
     
 }

@@ -26,7 +26,6 @@ class TaskListInterfaceController: WKInterfaceController {
         
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
-       // self.requestAccessReminder()
         self.putData(InterfaceController.reminders)
         
     }
@@ -45,15 +44,7 @@ class TaskListInterfaceController: WKInterfaceController {
     }
 
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
-        
-        if segueIdentifier == "showDetails"{
-           return self.arrayData[rowIndex]
-        }
-        
-        return nil
-    }
-    
+
 
     //preenche a table com os lembretes do dia de hoje
     func putData(array: [EKReminder]){
@@ -69,6 +60,7 @@ class TaskListInterfaceController: WKInterfaceController {
         
             if self.getDayOfReminder(task.dueDateComponents!.date!) == todayDate {
                 arrayReminder.append(task)
+                
             }
         }
         
@@ -124,6 +116,15 @@ class TaskListInterfaceController: WKInterfaceController {
         }
     }//fim segue
     
+    
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+        
+        if segueIdentifier == "showDetails"{
+            return self.arrayData[rowIndex]
+        }
+        
+        return nil
+    }
     
     
     
