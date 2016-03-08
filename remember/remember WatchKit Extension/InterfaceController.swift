@@ -59,6 +59,7 @@ class InterfaceController: WKInterfaceController {
                 self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
                     
                    InterfaceController.reminders = reminders
+                    print(reminders!)
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         

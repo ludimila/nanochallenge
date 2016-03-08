@@ -64,6 +64,7 @@ class ViewController: UIViewController, WCSessionDelegate{
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
         
         self.arrayReminderWatch = (userInfo["reminder"] as! [String])
+        
         self.reminderTitle = self.arrayReminderWatch.first!
         
         self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
@@ -74,9 +75,7 @@ class ViewController: UIViewController, WCSessionDelegate{
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        self.compareReminders(reminders!)
-                        
-                        
+                        self.saveReminder(reminders!)
                     }
                 })
             }else{
@@ -84,35 +83,31 @@ class ViewController: UIViewController, WCSessionDelegate{
 
             }
         }
-        
-        
-        
 
     }
     
     
+    //compara reminder do watch com reminder do iphone antes de fazer as modificações e salva as modificacoes
     
+    func saveReminder(remindersIphone: [EKReminder]){
     
-    //compara reminder do watch com reminder do iphone antes de fazer as modificações
-    
-    func compareReminders(remindersIphone: [EKReminder]){
-    
-        
         for (_, task) in remindersIphone.enumerate(){
         
             if task.title == self.arrayReminderWatch.first{
                 
-                self.label.text = (self.reminderTitle)
-                self.prio.text = (task.title)
-            
-                print("Watch:    \(self.arrayReminderWatch[4])")
-                print("Iphone:   \(task.calendarItemIdentifier)")
-            
-            }
-        
-        }
-            
+                task.completionDate = NSDate()
+                task.completed = true
+                
+                do {
+                    try self.eventStore.saveReminder(task, commit: true)
 
+                }catch{
+                    print("Error creating and saving new reminder : \(error)")
+                
+                }
+                
+            }
+        }
     
     }
     

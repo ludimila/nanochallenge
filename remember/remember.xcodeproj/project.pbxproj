@@ -244,12 +244,15 @@
 				TargetAttributes = {
 					932909A21C7BA17400C24500 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7K58N8K4L5;
 					};
 					932909B41C7BA17400C24500 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7K58N8K4L5;
 					};
 					932909C31C7BA17400C24500 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7K58N8K4L5;
 					};
 				};
 			};
@@ -461,6 +464,7 @@
 		932909D31C7BA17400C24500 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "remember WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.remember.watchkitapp.watchkitextension;
@@ -475,6 +479,7 @@
 		932909D41C7BA17400C24500 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "remember WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.remember.watchkitapp.watchkitextension;
@@ -490,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = remember_WatchKit_Extension;
 				INFOPLIST_FILE = "remember WatchKit App/Info.plist";
@@ -506,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = remember_WatchKit_Extension;
 				INFOPLIST_FILE = "remember WatchKit App/Info.plist";
@@ -522,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = remember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.remember;
@@ -533,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = remember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.remember;
