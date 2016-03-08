@@ -14,10 +14,11 @@ class ViewController: UIViewController, WCSessionDelegate{
 
     @IBOutlet weak var label: UILabel!
     
-    var reminder = String()
+    var reminder = EKReminder()
     var session: WCSession!
     var eventStore = EKEventStore()
     
+    var teste = [String]()
     
     var reminderTitle = String()
     var reminderCompletionDate = String()
@@ -54,42 +55,14 @@ class ViewController: UIViewController, WCSessionDelegate{
     }
     
     
-
     
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
         
-        //recieve messages from watch
+        self.teste = (userInfo["reminder"] as! [String])
         
-        self.reminderTitle = (userInfo["title"]! as? String)!
-//        self.reminderCompletionDate = (userInfo["completioDate"]! as? String)!
-//        self.reminderDueDate = (userInfo["dueDate"]! as? String)!
-        self.reminderPriority = (userInfo["priority"]! as? String)!
-//        self.reminderIdentifier = (userInfo["identifier"]! as? String)!
-
-        
-        dispatch_async(dispatch_get_main_queue(), {
-
-            self.reminderTitle = (userInfo["title"]! as? String)!
-//            self.reminderCompletionDate = (userInfo["completioDate"]! as? String)!
-//            self.reminderDueDate = (userInfo["dueDate"]! as? String)!
-            self.reminderPriority = (userInfo["priority"]! as? String)!
-//            self.reminderIdentifier = (userInfo["identifier"]! as? String)!
-            print(self.reminderTitle)
-            self.label.text = (userInfo["title"]! as? String)!
-            self.prio.text = (userInfo["priority"]! as? String)!
-
-            
-            })
-        
+        self.label.text = self.teste.first
+        self.prio.text = self.teste[0]
     }
-
-    
-    
-    
-    
-    
-    
-    
     
 }//FIM CLASSE
 

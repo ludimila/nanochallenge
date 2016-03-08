@@ -18,6 +18,8 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     var reminder = EKReminder()
     var saveString = [String]()
+    var arrayReminder = [String]()
+    
     
     //watchcnonnectivity
     var session:WCSession!
@@ -26,19 +28,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     var reminderDueDate = String()
     var reminderPriority = String()
     var reminderIdentifier = String()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -48,7 +38,6 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         self.addData()
         
@@ -57,7 +46,6 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
 
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
     
@@ -107,16 +95,12 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         for (_, task) in InterfaceController.reminders.enumerate(){
         
             if task == reminder{
+                task.completionDate = NSDate()
                 
                 self.makeString(task)
                 
                 if(WCSession.isSupported()){
-                    
-                    
-                    self.transferUserInfo(["title" : self.reminderTitle])
-                    self.transferUserInfo(["priority" : self.reminderPriority])
-
-                    
+                    self.transferUserInfo(["reminder" : self.arrayReminder])
                 }
             
             }
@@ -125,13 +109,27 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     
+    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
+        return session?.transferUserInfo(userInfo)
+    }
+    
+    
+    
     func makeString(reminder: EKReminder){
     
-        self.reminderTitle = "titulo"
-        self.reminderCompletionDate = "completion"
-        self.reminderDueDate = "due date"
-        self.reminderPriority = "9"
-        self.reminderIdentifier = "xxxxx"
+        self.reminderTitle = reminder.title
+        self.reminderCompletionDate = getDayOfReminder(reminder.completionDate!)
+        self.reminderDueDate = getDayOfReminder((reminder.dueDateComponents?.date)!)
+        self.reminderPriority = ("\(reminder.priority)")
+        self.reminderIdentifier = reminder.calendarItemIdentifier
+        
+        
+        self.arrayReminder.append(self.reminderTitle)
+        self.arrayReminder.append(self.reminderCompletionDate)
+        self.arrayReminder.append(self.reminderDueDate)
+        self.arrayReminder.append(self.reminderPriority)
+        self.arrayReminder.append(self.reminderIdentifier)
+        
     
     }
     
@@ -147,25 +145,23 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     
-    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
-        
-        return session.transferUserInfo(userInfo)
-    }
-    
-    
-//    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
-//        
-//        self.reminderTitle = (userInfo["title"]! as? String)!
-//
-//        
-//        
-//    }
-    
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
          self.reminderTitle = (message["a"]! as? String)!
-        print(self.reminderTitle)
 
     }
+    
+    
+    
+    //converte data pra string
+    func getDayOfReminder(date: NSDate) -> String{
+        
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let convertToString = formatter.stringFromDate(date)
+        
+        return convertToString
+    }
+
     
 }

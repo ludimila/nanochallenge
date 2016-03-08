@@ -128,7 +128,7 @@ class TaskListInterfaceController: WKInterfaceController {
     
     
     
-    //pega o nome do dia da semana
+    //converte data pra string
     func getDayOfReminder(date: NSDate) -> String{
         
         let formatter  = NSDateFormatter()
