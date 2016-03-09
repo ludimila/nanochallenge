@@ -34,8 +34,6 @@ class TaskListInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        
-        
     }
 
     override func didDeactivate() {
@@ -43,25 +41,16 @@ class TaskListInterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
-    
-
 
     //preenche a table com os lembretes do dia de hoje
     func putData(array: [EKReminder]){
         
         var arrayReminder = [EKReminder]()
-        let today = NSDate()
-        
-        let todayDate = self.getDayOfReminder(today)
-        
         
         //pega todo o array de lembretes e separa os que são de hoje
         for (_, task) in array.enumerate(){
         
-            if self.getDayOfReminder(task.dueDateComponents!.date!) == todayDate {
                 arrayReminder.append(task)
-                
-            }
         }
         
         //apenas os lembretes de hoje
@@ -74,8 +63,8 @@ class TaskListInterfaceController: WKInterfaceController {
             
             row.taskLabel.setText(task.title)
             
-            if task.dueDateComponents != nil {
-                row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
+            if task.dueDateComponents == nil {
+                row.taskHour.setText("\(index+2):\(index+19)")
             }//fim due date
 
                 

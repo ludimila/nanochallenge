@@ -46,16 +46,16 @@
                         <table alignment="left" id="ALi-He-PY8">
                             <items>
                                 <tableRow identifier="row" id="NFD-Pd-HsU" customClass="RowListController" customModule="remember_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="51.5" alignment="left" id="4Pv-RC-59E">
+                                    <group key="rootItem" width="1" height="68.5" alignment="left" id="4Pv-RC-59E">
                                         <items>
-                                            <group width="99" alignment="left" layout="vertical" id="cgL-yf-TOc">
+                                            <group width="99" height="76.5" alignment="left" layout="vertical" id="cgL-yf-TOc">
                                                 <items>
-                                                    <group width="1" alignment="left" layout="vertical" id="bCg-hH-ujf">
+                                                    <group width="1" height="74.5" alignment="left" layout="vertical" id="bCg-hH-ujf">
                                                         <items>
-                                                            <label alignment="left" text="Label" id="cOj-jW-ji8">
+                                                            <label alignment="left" text="Label" numberOfLines="3" id="cOj-jW-ji8">
                                                                 <fontDescription key="font" name="SFCompactText-Semibold" family="SF Compact Text" pointSize="17"/>
                                                             </label>
-                                                            <label alignment="left" text="Label" id="c8W-iy-KVw">
+                                                            <label alignment="left" verticalAlignment="center" text="Label" numberOfLines="3" id="c8W-iy-KVw">
                                                                 <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="font" name="SFCompactText-Light" family="SF Compact Text" pointSize="15"/>
                                                             </label>
@@ -78,7 +78,7 @@
                                 </tableRow>
                             </items>
                         </table>
-                        <button width="1" alignment="left" title="New" id="XqK-Jz-ptj">
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="New" id="XqK-Jz-ptj">
                             <connections>
                                 <segue destination="Bq6-xE-xeQ" kind="push" identifier="newReminder" id="2RJ-Re-hcO"/>
                             </connections>

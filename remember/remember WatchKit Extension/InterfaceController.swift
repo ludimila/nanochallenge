@@ -18,9 +18,13 @@ class InterfaceController: WKInterfaceController {
     
     var eventStore = EKEventStore()
     static var reminders: [EKReminder]!
+    
+    var teste = [EKReminder]()
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        
+        self.myReminders()
     
     
     }
@@ -29,7 +33,7 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
         
         self.getDayOfWeek()
-        self.requestAccessReminder()
+        
         self.configureButton()
         
     }
@@ -49,29 +53,28 @@ class InterfaceController: WKInterfaceController {
     }
     
     
+    func myReminders(){
     
-    //acessa os lembretes
-    func requestAccessReminder(){
-        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
-            
-            if granted{
-                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                   InterfaceController.reminders = reminders
-                    print(reminders!)
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        self.getAllTasks(InterfaceController.reminders)
-                    }
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
-            }
-        }
+    
+        let one = EKReminder()
+        let two = EKReminder()
+        let thre = EKReminder()
+
+        
+        one.title = "Comprar banana"
+        one.priority = 0
+        two.title = "Ligar para a Maria"
+        two.priority = 9
+        thre.title = "Assistir ao Oscar"
+        thre.priority = 5
+        
+        self.teste.append(one)
+        self.teste.append(two)
+        self.teste.append(thre)
+        
+        InterfaceController.reminders = self.teste
+    
     }
-    
     
     
     //conta o total de lembretes

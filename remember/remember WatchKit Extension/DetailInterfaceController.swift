@@ -35,6 +35,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         
         self.reminder = (context as? EKReminder)!
         self.detailLabel.setText(reminder.title)
+
     }
 
     override func willActivate() {
@@ -76,7 +77,10 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         
         if self.saveString[0] == "DONE!"{
             
-           self.compareReminder(self.reminder)
+            if(WCSession.isSupported()){
+                self.transferUserInfo(["reminder" : self.reminder.title])
+                print("AMOR: \(self.reminder.title)")
+            }
             
         }else if self.saveString[1] == "To Do"{
             
@@ -89,50 +93,12 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
         
         self.popController()
     }
-    
-    //verifica se a task atual e a original são iguais/mesmas
-    func compareReminder(reminder: EKReminder){
-        for (_, task) in InterfaceController.reminders.enumerate(){
-        
-            if task == reminder{
-                task.completionDate = NSDate()
-                
-                self.makeString(task)
-                
-                if(WCSession.isSupported()){
-                    self.transferUserInfo(["reminder" : self.arrayReminder])
-                }
-            
-            }
-            
-        }
-    }
-    
+
     
     func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
         return session?.transferUserInfo(userInfo)
     }
     
-    
-    
-    //transforma os dados do lembretes em strings
-    func makeString(reminder: EKReminder){
-    
-        self.reminderTitle = reminder.title
-        self.reminderCompletionDate = getDayOfReminder(reminder.completionDate!)
-        self.reminderDueDate = getDayOfReminder((reminder.dueDateComponents?.date)!)
-        self.reminderPriority = ("\(reminder.priority)")
-        self.reminderIdentifier = reminder.calendarItemIdentifier
-        
-        
-        self.arrayReminder.append(self.reminderTitle)
-        self.arrayReminder.append(self.reminderCompletionDate)
-        self.arrayReminder.append(self.reminderDueDate)
-        self.arrayReminder.append(self.reminderPriority)
-        self.arrayReminder.append(self.reminderIdentifier)
-        
-    
-    }
     
     
     //conectividade do lado do watch
