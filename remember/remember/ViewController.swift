@@ -37,6 +37,9 @@ class ViewController: UIViewController, WCSessionDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.requestAccessReminder()
+        self.getReminders()
         self.setupWatchConnectivity()
         session.sendMessage(["a":"Conexão estabelecida"], replyHandler: nil, errorHandler: nil)
 }
@@ -48,43 +51,60 @@ class ViewController: UIViewController, WCSessionDelegate{
 
 
     
-    //metodos de conectividade
     
-    // Do any additional setup after loading the view, typically from a nib.
-    func setupWatchConnectivity() {
-        
-        if(WCSession.isSupported()){
-            self.session = WCSession.defaultSession()
-            self.session.delegate = self
-            self.session.activateSession()
-        }
-    }
     
-    //recebe os dados do watch
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
-        
-        self.arrayReminderWatch = (userInfo["reminder"] as! [String])
-        
-        self.reminderTitle = self.arrayReminderWatch.first!
-        
+    
+    
+    //solicita acesso aos lembretes
+    func requestAccessReminder(){
         self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
             
             if granted{
-                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        self.saveReminder(reminders!)
-                    }
-                })
+                print("deu bom")
             }else{
                 print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
-
             }
         }
-
     }
+    
+    
+    //le todos os lembretes
+    func getReminders(){
+        let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+        self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                print(reminders!)
+                
+            }
+        })
+        
+        
+    }
+    
+    
+    //conta o total de lembretes
+    func getAllTasks(tasks: [EKReminder]) -> Int{
+        var completed = 0
+        var notCompleted = 0
+        
+        for (_, task) in tasks.enumerate(){
+            
+            
+            if task.completed == true {
+                completed++
+            }else{
+                notCompleted++
+            }
+        }//fim for
+        
+        return (completed+notCompleted)
+        
+    }// fim getalltasks
+    
+
+
     
     
     //compara reminder do watch com reminder do iphone antes de fazer as modificações e salva as modificacoes
@@ -110,6 +130,51 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     
     }
+    
+    
+    //metodos de conectividade
+    
+    // Do any additional setup after loading the view, typically from a nib.
+    func setupWatchConnectivity() {
+        
+        if(WCSession.isSupported()){
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
+        }
+    }
+    
+    
+    
+    //recebe os dados do watch
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        
+        self.arrayReminderWatch = (userInfo["reminder"] as! [String])
+        self.reminderTitle = self.arrayReminderWatch.first!
+    }
+    
+    
+    //envia dados para o watch
+    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
+        return session?.transferUserInfo(userInfo)
+    }
+    
+    
+    
+    
+    
+    
+    
+    //converte data pra string
+    func getDayOfReminder(date: NSDate) -> String{
+        
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let convertToString = formatter.stringFromDate(date)
+        
+        return convertToString
+    }
+
     
     
     

@@ -9,6 +9,7 @@
 import WatchKit
 import Foundation
 import EventKit
+import WatchConnectivity
 
 
 class InterfaceController: WKInterfaceController {
@@ -29,7 +30,6 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
         
         self.getDayOfWeek()
-        self.requestAccessReminder()
         self.configureButton()
         
     }
@@ -48,53 +48,9 @@ class InterfaceController: WKInterfaceController {
 
     }
     
-    
-    
-    //acessa os lembretes
-    func requestAccessReminder(){
-        self.eventStore.requestAccessToEntityType(.Reminder) { (granted: Bool, error: NSError?) -> Void in
-            
-            if granted{
-                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                   InterfaceController.reminders = reminders
-                    print(reminders!)
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        self.getAllTasks(InterfaceController.reminders)
-                    }
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
-            }
-        }
-    }
-    
-    
-    
-    //conta o total de lembretes
-    func getAllTasks(tasks: [EKReminder]){
-        
-        var completed = 0
-        var notCompleted = 0
-        
-        for (_, task) in tasks.enumerate(){
-            
-            
-            if task.completed == true {
-                completed++
-            }else{
-                notCompleted++
-            }
-        }//fim for
 
-        self.completedTasks(completed+notCompleted)
-        
-    }// fim getalltasks
     
-    
+      
     
     //seta a cor de acordo com a quantidade de tarefas do dia
     func completedTasks(numberOfTasks: Int){
