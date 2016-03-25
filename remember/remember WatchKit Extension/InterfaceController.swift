@@ -9,24 +9,65 @@
 import WatchKit
 import Foundation
 import EventKit
+import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var groupTasks: WKInterfaceGroup!
     @IBOutlet var tasksButton: WKInterfaceButton!
     
     var eventStore = EKEventStore()
-    static var reminders: [EKReminder]!
+    static var arrayIphone = [String]()
     
     var teste = [EKReminder]()
+    
+    
+    
+    
+    //WatchConnectivity
+    var session: WCSession!
+    var reminderTitle = String()
+    var reminderCompletionDate = String()
+    var reminderDueDate = String()
+    var reminderPriority = String()
+    var reminderIdentifier = String()
+    
+
+    
+    
+    
+    
+    
+    
+    
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        self.myReminders()
+        
+        self.setupWatchConnectivity()
+        session.sendMessage(["a":"Conexão estabelecida"], replyHandler: nil, errorHandler: nil)
+    }
     
     
+    
+    //metodos de conectividade
+    
+    func setupWatchConnectivity() {
+        
+        if(WCSession.isSupported()){
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
+        }
+    }
+
+    
+    //recebe os dados do iphone
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        
+       InterfaceController.arrayIphone.append(userInfo["reminder"] as! String)
     }
 
     override func willActivate() {
@@ -53,28 +94,28 @@ class InterfaceController: WKInterfaceController {
     }
     
     
-    func myReminders(){
-    
-    
-        let one = EKReminder()
-        let two = EKReminder()
-        let thre = EKReminder()
-
-        
-        one.title = "Comprar banana"
-        one.priority = 0
-        two.title = "Ligar para a Maria"
-        two.priority = 9
-        thre.title = "Assistir ao Oscar"
-        thre.priority = 5
-        
-        self.teste.append(one)
-        self.teste.append(two)
-        self.teste.append(thre)
-        
-        InterfaceController.reminders = self.teste
-    
-    }
+//    func myReminders(){
+//    
+//    
+//        let one = EKReminder()
+//        let two = EKReminder()
+//        let thre = EKReminder()
+//
+//        
+//        one.title = "Comprar banana"
+//        one.priority = 0
+//        two.title = "Ligar para a Maria"
+//        two.priority = 9
+//        thre.title = "Assistir ao Oscar"
+//        thre.priority = 5
+//        
+//        self.teste.append(one)
+//        self.teste.append(two)
+//        self.teste.append(thre)
+//        
+//       // InterfaceController.reminders = self.teste
+//    
+//    }
     
     
     //conta o total de lembretes
@@ -125,8 +166,13 @@ class InterfaceController: WKInterfaceController {
         let convertToString = formatter.stringFromDate(todayDate)
         self.tasksButton.setTitle(convertToString)
         
-        
     }
+    
+    
+    
+    
+    //conectividade
+    
 }//fim classe
 
 

@@ -26,7 +26,7 @@ class TaskListInterfaceController: WKInterfaceController {
         
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
-        self.putData(InterfaceController.reminders)
+        self.putData(InterfaceController.arrayIphone)
         
     }
 
@@ -36,40 +36,24 @@ class TaskListInterfaceController: WKInterfaceController {
         
     }
 
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
 
     //preenche a table com os lembretes do dia de hoje
-    func putData(array: [EKReminder]){
+    func putData(array: [String]){
         
-        var arrayReminder = [EKReminder]()
+
+        self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
-        //pega todo o array de lembretes e separa os que são de hoje
-        for (_, task) in array.enumerate(){
-        
-                arrayReminder.append(task)
-        }
-        
-        //apenas os lembretes de hoje
-        self.tableData.setNumberOfRows(arrayReminder.count, withRowType: "row")
-        
-        for (index, task) in arrayReminder.enumerate(){
+        for (index, task) in array.enumerate(){
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             //let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
             
-            row.taskLabel.setText(task.title)
-            
-            if task.dueDateComponents == nil {
-                row.taskHour.setText("\(index+2):\(index+19)")
-            }//fim due date
-
-                
-            self.managePriority(task.priority,row: row)
-            self.arrayData = arrayReminder
+            row.taskLabel.setText(task)
+        
+            print(task)
+             
+//            self.managePriority(task.priority,row: row)
+//            self.arrayData = arrayReminder
         }
     }
     
@@ -93,7 +77,7 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    //chama a tela com o dictation - REMOVER ESSE METODO INUTIL
+    //chama a tela com o dictation - REMOVER ESSE METODO 
     override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
         
         if segueIdentifier == "newReminder"{
@@ -104,6 +88,11 @@ class TaskListInterfaceController: WKInterfaceController {
             return nil
         }
     }//fim segue
+    
+    
+    
+    
+    
     
     
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {

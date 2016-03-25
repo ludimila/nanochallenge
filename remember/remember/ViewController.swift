@@ -45,32 +45,7 @@ class ViewController: UIViewController, WCSessionDelegate{
         
 }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
-    
-    //metodos de conectividade
-    
-    // Do any additional setup after loading the view, typically from a nib.
-    func setupWatchConnectivity() {
-        
-        if(WCSession.isSupported()){
-            self.session = WCSession.defaultSession()
-            self.session.delegate = self
-            self.session.activateSession()
-        }
-    }
-    
-    //recebe os dados do watch
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
-        
-        self.arrayReminderWatch = (userInfo["reminder"] as! String)
-    }
-    
-    
+    //solicita permissao ao watch
     
     func requestAccess(){
         
@@ -85,17 +60,45 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     }
     
+    //pega todos os lembretes do watch
     func getAllReminders(){
-    
+        
         let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
         self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                self.saveReminder(reminders!)
+                
+                for (index, task) in (reminders?.enumerate())!{
+                    if(WCSession.isSupported()){
+                        self.transferUserInfo(["reminder" : task.title])
+                    }
+                    
+                }
             }
         })
     }
+    
+
+
+    
+    //metodos de conectividade
+    
+    func setupWatchConnectivity() {
+        
+        if(WCSession.isSupported()){
+            self.session = WCSession.defaultSession()
+            self.session.delegate = self
+            self.session.activateSession()
+        }
+    }
+    
+    
+    func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
+        print(userInfo.description)
+        return session?.transferUserInfo(userInfo)
+    }
+    
     
     
     //compara reminder do watch com reminder do iphone antes de fazer as modificações e salva as modificacoes
