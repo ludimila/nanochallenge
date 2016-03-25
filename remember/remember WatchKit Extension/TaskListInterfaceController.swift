@@ -26,7 +26,7 @@ class TaskListInterfaceController: WKInterfaceController {
         
         self.eventStore = EKEventStore()
         self.reminders = [EKReminder]()
-        self.putData(InterfaceController.reminders)
+        self.putData(InterfaceController.arrayIphone)
         
     }
 
@@ -34,53 +34,26 @@ class TaskListInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        
-        
     }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
-    
 
 
     //preenche a table com os lembretes do dia de hoje
-    func putData(array: [EKReminder]){
+    func putData(array: [String]){
         
-        var arrayReminder = [EKReminder]()
-        let today = NSDate()
+
+        self.tableData.setNumberOfRows(array.count, withRowType: "row")
         
-        let todayDate = self.getDayOfReminder(today)
-        
-        
-        //pega todo o array de lembretes e separa os que são de hoje
-        for (_, task) in array.enumerate(){
-        
-            if self.getDayOfReminder(task.dueDateComponents!.date!) == todayDate {
-                arrayReminder.append(task)
-                
-            }
-        }
-        
-        //apenas os lembretes de hoje
-        self.tableData.setNumberOfRows(arrayReminder.count, withRowType: "row")
-        
-        for (index, task) in arrayReminder.enumerate(){
+        for (index, task) in array.enumerate(){
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             //let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
             
-            row.taskLabel.setText(task.title)
-            
-            if task.dueDateComponents != nil {
-                row.taskHour.setText("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
-            }//fim due date
-
-                
-            self.managePriority(task.priority,row: row)
-            self.arrayData = arrayReminder
+            row.taskLabel.setText(task)
+        
+            print(task)
+             
+//            self.managePriority(task.priority,row: row)
+//            self.arrayData = arrayReminder
         }
     }
     
@@ -104,7 +77,7 @@ class TaskListInterfaceController: WKInterfaceController {
     }
     
     
-    //chama a tela com o dictation - REMOVER ESSE METODO INUTIL
+    //chama a tela com o dictation - REMOVER ESSE METODO 
     override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
         
         if segueIdentifier == "newReminder"{
@@ -115,6 +88,11 @@ class TaskListInterfaceController: WKInterfaceController {
             return nil
         }
     }//fim segue
+    
+    
+    
+    
+    
     
     
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
