@@ -48,7 +48,8 @@ class TaskListInterfaceController: WKInterfaceController {
             let row = tableData.rowControllerAtIndex(index) as! RowListController
             //let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
             
-            row.taskLabel.setText(task)
+                row.taskLabel.setText(task)
+        
         
             print(task)
              

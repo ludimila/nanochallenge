@@ -20,10 +20,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var eventStore = EKEventStore()
     static var arrayIphone = [String]()
     
-    var teste = [EKReminder]()
-    
-    
-    
     
     //WatchConnectivity
     var session: WCSession!
@@ -60,7 +56,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     //recebe os dados do iphone
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
         
-       InterfaceController.arrayIphone.append(userInfo["reminder"] as! String)
+       InterfaceController.arrayIphone = (userInfo["dict"] as! [String])
+        
+  
     }
 
     override func willActivate() {

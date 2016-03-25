@@ -33,6 +33,8 @@ class ViewController: UIViewController, WCSessionDelegate{
     var reminderPriority = String()
     var reminderIdentifier = String()
     
+   var arrayDict = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,10 +73,14 @@ class ViewController: UIViewController, WCSessionDelegate{
                 
                 
                 for (index, task) in (reminders?.enumerate())!{
-                    if(WCSession.isSupported()){
-                        self.transferUserInfo(["reminder" : task.title])
-                    }
                     
+                    self.arrayDict.append(task.title)
+                    self.arrayDict.append(("\(task.priority)"))
+                    
+                }//fim for
+                
+                if(WCSession.isSupported()){
+                    self.transferUserInfo(["dict" : self.arrayDict])
                 }
             }
         })
@@ -121,19 +127,11 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     }
     
-    
 
-    
-    
     //envia dados para o watch
     func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
         return session?.transferUserInfo(userInfo)
     }
-    
-    
-    
-    
-    
     
     
     //converte data pra string
@@ -146,6 +144,8 @@ class ViewController: UIViewController, WCSessionDelegate{
         return convertToString
     }
 
+    
+    
     
     
     
