@@ -33,8 +33,7 @@ class DetailInterfaceController: WKInterfaceController, WCSessionDelegate {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        self.reminder = (context as? EKReminder)!
-        self.detailLabel.setText(reminder.title)
+        self.detailLabel.setText(context as? String)
 
     }
 

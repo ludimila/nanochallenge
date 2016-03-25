@@ -72,10 +72,22 @@ class ViewController: UIViewController, WCSessionDelegate{
             dispatch_async(dispatch_get_main_queue()) {
                 
                 
-                for (index, task) in (reminders?.enumerate())!{
+                for (_, task) in (reminders?.enumerate())!{
                     
                     self.arrayDict.append(task.title)
-                    self.arrayDict.append(("\(task.priority)"))
+                    
+                    if task.priority != 0{
+                        self.arrayDict.append(("\(task.priority)"))
+                    }else{
+                        self.arrayDict.append("0")
+                    }
+                    if task.dueDateComponents != nil{
+                        self.arrayDict.append("\(task.dueDateComponents!.hour):\(task.dueDateComponents!.minute)")
+                    }else{
+                    
+                        self.arrayDict.append("Sem horario definido")
+                    }
+
                     
                 }//fim for
                 

@@ -16,60 +16,51 @@ class TaskListInterfaceController: WKInterfaceController {
  
     @IBOutlet var tableData: WKInterfaceTable!
     
-    var arrayData = [EKReminder]()
-    var eventStore: EKEventStore!
-    var reminders: [EKReminder]!
-    var events: [EKEvent]!
+    
+    var arrayReminderTitles = [String]()
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        self.eventStore = EKEventStore()
-        self.reminders = [EKReminder]()
         self.putData(InterfaceController.arrayIphone)
         
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
     }
 
 
     //preenche a table com os lembretes do dia de hoje
-    func putData(array: [String]){
+    func putData(reminders: [String]){
         
-
-        self.tableData.setNumberOfRows(array.count, withRowType: "row")
+        self.tableData.setNumberOfRows(reminders.count/3, withRowType: "row")
         
-        for (index, task) in array.enumerate(){
+        for index in 0 ... reminders.count/3-1 {
             
             let row = tableData.rowControllerAtIndex(index) as! RowListController
-            //let taskDay = getDayOfReminder(task.dueDateComponents!.date!)
+           
+                row.taskLabel.setText(reminders[index*3])
+                row.taskHour.setText(reminders[index*3+2])
+                self.managePriority(reminders[index*3+1],row: row)
             
-                row.taskLabel.setText(task)
-        
-        
-            print(task)
-             
-//            self.managePriority(task.priority,row: row)
-//            self.arrayData = arrayReminder
+            self.arrayReminderTitles.append(reminders[index*3])
         }
+        
     }
     
-    
     //seta a cor do separator de acordo com a prioridade da task
-    func managePriority(prioprity: Int, row: RowListController){
+    func managePriority(prioprity: String, row: RowListController){
         
         switch(prioprity){
-        case 0:
+        case "0":
             row.separator.setColor(UIColor.whiteColor())
-        case 9:
+        case "9":
             row.separator.setColor(UIColor.greenColor())
-        case 5:
+        case "5":
             row.separator.setColor(UIColor.yellowColor())
-        case 1:
+        case "1":
             row.separator.setColor(UIColor.redColor())
         default:
             break
@@ -90,21 +81,16 @@ class TaskListInterfaceController: WKInterfaceController {
         }
     }//fim segue
     
-    
-    
-    
-    
-    
-    
+
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
-        if segueIdentifier == "showDetails"{
-            return self.arrayData[rowIndex]
-        }
         
+        if segueIdentifier == "showDetails"{
+            return self.arrayReminderTitles[rowIndex]
+        
+        }
         return nil
     }
-    
     
     
     //converte data pra string
